@@ -95,4 +95,11 @@ def gen_third_layer(custom_map:object) -> object:
 
 
 if __name__ == '__main__':
-    pass
+    year, coordinates = get_input()
+    print('Map is generating...\nPlease wait...')
+    generated_map = gen_first_layer()
+    film_locations = get_closest_points(year, coordinates)
+    generated_map = gen_second_layer(film_locations, generated_map)
+    generated_map = gen_third_layer(generated_map)
+    generated_map.save(str(year) + '_movies_map.html')
+    print('Finished. Please have look at the map ' + str(year) + '_movies_map.html')
