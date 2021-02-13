@@ -15,7 +15,7 @@ Please enter a year you would like to have a map for: 2015
 Please enter your location (format: lat, long): 49.83826, 24.02324
 Map is generating...
 Please wait...
-Finished. Please have look at the map 2000_movies_map.html
+Finished. Please have look at the map 2015_movies_map.html
 ```
 The result:
 ![Example output](example.jpg)
