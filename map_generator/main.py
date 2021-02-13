@@ -53,7 +53,7 @@ def get_closest_points(year:int, coordinates:tuple) -> list:
     title_coordinates, distance) of first ten films.
     '''
     output_list = []
-    with open('./../tests/locations_transformed.tsv', 'r', encoding='iso-8859-1') as f_transformed:
+    with open('./../data/locations_transformed.tsv', 'r', encoding='iso-8859-1') as f_transformed:
         for line in f_transformed:
             sample_lst = line.split('\t')
             # CHECK IF YEAR IS CORRECT
