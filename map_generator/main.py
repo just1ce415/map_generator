@@ -3,10 +3,10 @@ Laboratory 2.2
 Main module
 GitHub: https://github.com/just1ce415/map_generator.git
 """
-import folium
 from math import sin, cos, sqrt, asin
+import folium
 
-earth_radius = 6371.0
+EARTH_RADIUS = 6371.0
 
 def get_input() -> tuple:
     '''
@@ -44,7 +44,7 @@ def calculate_distance(x_cor1:float, y_cor1:float, x_cor2:float, y_cor2:float) -
         assert 0 < h_check < 1
     except AssertionError:
         return None
-    return round(2*earth_radius*asin(sqrt(h_check)), 5)
+    return round(2*EARTH_RADIUS*asin(sqrt(h_check)), 5)
 
 
 def get_closest_points(year:int, coordinates:tuple) -> list:
@@ -75,7 +75,7 @@ def gen_second_layer(closests_points:list, custom_map:object) -> object:
         fg.add_child(folium.Marker(location=[elem[2][0], elem[2][1]],
         popup=str(elem[0] + ', ' + elem[1]), icon=folium.Icon()))
     custom_map.add_child(fg)
-    return custom_map    
+    return custom_map
 
 
 def gen_third_layer(custom_map:object) -> object:
@@ -95,11 +95,11 @@ def gen_third_layer(custom_map:object) -> object:
 
 
 if __name__ == '__main__':
-    year, coordinates = get_input()
+    usr_year, usr_coordinates = get_input()
     print('Map is generating...\nPlease wait...')
     generated_map = gen_first_layer()
-    film_locations = get_closest_points(year, coordinates)
+    film_locations = get_closest_points(usr_year, usr_coordinates)
     generated_map = gen_second_layer(film_locations, generated_map)
     generated_map = gen_third_layer(generated_map)
-    generated_map.save(str(year) + '_movies_map.html')
-    print('Finished. Please have look at the map ' + str(year) + '_movies_map.html')
+    generated_map.save(str(usr_year) + '_movies_map.html')
+    print('Finished. Please have look at the map ' + str(usr_year) + '_movies_map.html')

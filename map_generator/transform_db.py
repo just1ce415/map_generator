@@ -9,6 +9,9 @@ from geopy.extra.rate_limiter import RateLimiter
 PATH = './../data/'
 
 def trasform_db():
+    '''
+    Transform db (adding coordinates).
+    '''
     # CONVERT TO LIST
     buffer_lst = []
     geolocator = Nominatim(user_agent='map_generator')
@@ -34,11 +37,10 @@ def trasform_db():
             except Exception:
                 location = None
             # CHECKING IF LOCATION EXISTS
-            if location == None:
+            if location is None:
                 continue
-            else:
-                latitude = str(location.latitude)
-                longitude = str(location.longitude)
+            latitude = str(location.latitude)
+            longitude = str(location.longitude)
             buffer_lst.append((film_name, film_location, latitude, longitude))
     # WRITE IN FILE
     with open(PATH+'locations_transformed.tsv', 'a', encoding='utf-8') as f_locations:
@@ -47,6 +49,9 @@ def trasform_db():
 
 
 def cut_database():
+    '''
+    Cut db (minimize size).
+    '''
     buffer_lst = []
     # STORING BUFFER
     with open(PATH+'locations.list', 'r', encoding='iso-8859-1') as f_locations:
