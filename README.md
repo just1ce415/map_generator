@@ -22,6 +22,9 @@ The result:
 
 ## HTML description
 head, body - basic tags
+
 link - tag to link css files
+
 script - tag to execute js code
+
 meta - tag to define metadata
