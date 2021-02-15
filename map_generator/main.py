@@ -3,7 +3,7 @@ Laboratory 2.2
 Main module
 GitHub: https://github.com/just1ce415/map_generator.git
 """
-from math import sin, cos, sqrt, asin
+from math import sin, cos, sqrt, asin, pi
 import folium
 
 EARTH_RADIUS = 6371.0
@@ -37,6 +37,11 @@ def calculate_distance(x_cor1:float, y_cor1:float, x_cor2:float, y_cor2:float) -
     '''
     Calculates distance between 1 and 2 points with haversinus formula.
     '''
+    # CASTING COORDS TO THE RADIANES
+    x_cor1 = x_cor1 * (180/pi)
+    x_cor2 = x_cor2 * (180/pi)
+    y_cor1 = y_cor1 * (180/pi)
+    y_cor2 = y_cor2 * (180/pi)
     h_check = ((sin((x_cor2-x_cor1) / 2))**2 + cos(x_cor1)*cos(x_cor2) *
     (sin((y_cor2-y_cor1) / 2))**2)
     # CHECKUNG IF H MAKES SENSE
@@ -62,8 +67,12 @@ def get_closest_points(year:int, coordinates:tuple) -> list:
             title_lat = float(sample_lst[2])
             title_len = float(sample_lst[3][:-1])
             distance = calculate_distance(coordinates[0], coordinates[1], title_lat, title_len)
+            # CHECK DIST    
+            if distance is None:
+                continue
             output_list.append((sample_lst[0], sample_lst[1], (title_lat, title_len), distance))
-    return sorted(output_list, key=lambda x: x[3])[:11]
+    output_list = sorted(output_list, key=lambda x: x[3])
+    return output_list[:11]
 
 
 def gen_second_layer(closests_points:list, custom_map:object) -> object:
